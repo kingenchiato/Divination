@@ -1,0 +1,401 @@
+@import "tailwindcss";
+
+/* ===========================================
+ * Fortune AI Design System — 東洋の書斎
+ * Tokens validated for WCAG AA/AAA contrast.
+ * Detailed spec: docs/design-system.md
+ * =========================================== */
+
+:root {
+  /* Base palette (日本伝統色) */
+  --jp-shikkoku: 13 13 20;       /* #0D0D14 漆黒 */
+  --jp-sumizome: 26 26 40;       /* #1A1A28 墨染 */
+  --jp-aiiro: 34 58 94;          /* #223A5E 藍色  — borders/decor only (< 2:1) */
+  --jp-aikasumi: 123 160 200;    /* #7BA0C8 藍霞  — text-safe variant (~6.7:1) */
+  --jp-kinpaku: 201 168 76;      /* #C9A84C 金箔  — AAA on shikkoku */
+  --jp-shuiro: 197 61 67;        /* #C53D43 朱色  — large text only (3.8:1) */
+  --jp-shumei: 224 122 127;      /* #E07A7F 朱明  — text-safe variant */
+  --jp-shikon: 91 50 112;        /* #5B3270 紫紺  — decor only */
+  --jp-usumurasaki: 167 139 191; /* #A78BBF 薄紫  — text-safe variant */
+  --jp-shironeri: 243 240 230;   /* #F3F0E6 白練  — AAA on shikkoku */
+  --jp-enji: 182 48 62;          /* #B6303E 臙脂色 (deep crimson) — SealStar brand color */
+
+  /* Semantic tokens (use these in components) */
+  --color-bg-base: rgb(var(--jp-shikkoku));
+  --color-bg-surface: rgb(var(--jp-sumizome));
+  --color-bg-elevated: rgb(var(--jp-sumizome) / 0.7);
+  --color-border-subtle: rgb(var(--jp-aiiro));
+  --color-border-strong: rgb(var(--jp-kinpaku) / 0.4);
+
+  --color-text-primary: rgb(var(--jp-shironeri));
+  --color-text-secondary: rgb(var(--jp-shironeri) / 0.7);
+  --color-text-muted: rgb(var(--jp-shironeri) / 0.5);
+
+  --color-accent-emphasis: rgb(var(--jp-kinpaku));
+  --color-accent-primary: rgb(var(--jp-aikasumi));
+  --color-accent-shibun: rgb(var(--jp-usumurasaki));
+  --color-accent-cta: rgb(var(--jp-shuiro));
+  --color-accent-cta-text: rgb(var(--jp-shironeri));
+  --color-accent-warning: rgb(var(--jp-shumei));
+
+  --color-ring: rgb(var(--jp-kinpaku) / 0.5);
+  --color-overlay: rgb(var(--jp-shikkoku) / 0.7);
+}
+
+@theme inline {
+  /* Background */
+  --color-bg-base: var(--color-bg-base);
+  --color-bg-surface: var(--color-bg-surface);
+  --color-bg-elevated: var(--color-bg-elevated);
+
+  /* Border */
+  --color-border-subtle: var(--color-border-subtle);
+  --color-border-strong: var(--color-border-strong);
+
+  /* Text */
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+
+  /* Accents */
+  --color-accent-emphasis: var(--color-accent-emphasis);
+  --color-accent-primary: var(--color-accent-primary);
+  --color-accent-shibun: var(--color-accent-shibun);
+  --color-accent-cta: var(--color-accent-cta);
+  --color-accent-cta-text: var(--color-accent-cta-text);
+  --color-accent-warning: var(--color-accent-warning);
+
+  /* Raw 日本伝統色 (for special cases — prefer semantic tokens) */
+  --color-shikkoku: rgb(var(--jp-shikkoku));
+  --color-sumizome: rgb(var(--jp-sumizome));
+  --color-aiiro: rgb(var(--jp-aiiro));
+  --color-aikasumi: rgb(var(--jp-aikasumi));
+  --color-kinpaku: rgb(var(--jp-kinpaku));
+  --color-shuiro: rgb(var(--jp-shuiro));
+  --color-shumei: rgb(var(--jp-shumei));
+  --color-shikon: rgb(var(--jp-shikon));
+  --color-usumurasaki: rgb(var(--jp-usumurasaki));
+  --color-shironeri: rgb(var(--jp-shironeri));
+  --color-enji: rgb(var(--jp-enji));
+
+  /* Fonts */
+  --font-mincho: var(--font-mincho), "Zen Old Mincho", serif;
+  --font-gothic: var(--font-gothic), "Zen Kaku Gothic New", sans-serif;
+  --font-decorative: var(--font-decorative), "Shippori Mincho B1", serif;
+  --font-seal: var(--font-seal), "Yuji Boku", "Shippori Mincho B1", serif;
+
+  /* Typography scale (東洋の書斎: wider line-height, generous breathing) */
+  --text-display: clamp(3rem, 5vw, 4rem);
+  --text-display--line-height: 1.3;
+  --text-display--font-weight: 600;
+
+  --text-h1: 2rem;
+  --text-h1--line-height: 1.5;
+  --text-h1--font-weight: 600;
+
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 1.55;
+  --text-h2--font-weight: 500;
+
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.6;
+  --text-h3--font-weight: 500;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.85;
+  --text-body-lg--font-weight: 400;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.8;
+  --text-body--font-weight: 400;
+
+  --text-caption: 0.875rem;
+  --text-caption--line-height: 1.7;
+  --text-caption--font-weight: 400;
+
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1.6;
+  --text-micro--font-weight: 500;
+
+  /* Letter spacing (日本語は広めが上品) */
+  --tracking-jp-tight: 0.02em;
+  --tracking-jp-normal: 0.04em;
+  --tracking-jp-wide: 0.08em;
+  --tracking-jp-decorative: 0.15em;
+
+  /* Spacing — 「間」(ma) system */
+  --spacing-ma-xs: 0.5rem;
+  --spacing-ma-sm: 1rem;
+  --spacing-ma-md: 1.5rem;
+  --spacing-ma-lg: 2.5rem;
+  --spacing-ma-xl: 4rem;
+  --spacing-ma-2xl: 6rem;
+}
+
+/* ===========================================
+ * Decoration utilities — 装飾レシピ
+ * =========================================== */
+
+/* 夜空に和紙 — main background。
+   深宇宙の奥行きを 4層 のグラデーションで作る:
+     1. 紫紺の極光 (top)
+     2. 藍色の海の奥行 (bottom)
+     3. 薄紫の漂い (center)
+     4. 和紙テクスチャ (微細ノイズ) */
+.bg-yozora-washi {
+  background-color: rgb(var(--jp-shikkoku));
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.94 0 0 0 0 0.9 0 0 0 0.012 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
+    radial-gradient(ellipse 80% 50% at 50% -5%, rgb(var(--jp-shikon) / 0.32) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 45% at 50% 110%, rgb(var(--jp-aiiro) / 0.28) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 40%, rgb(var(--jp-usumurasaki) / 0.06) 0%, transparent 70%);
+  background-size: 200px 200px, 100% 100%, 100% 100%, 100% 100%;
+  background-attachment: fixed, fixed, fixed, fixed;
+}
+
+/* Hero 用 — bg-yozora-washi の上にさらに重ねて深さを増す */
+.bg-nebula-hero {
+  position: relative;
+}
+.bg-nebula-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle 600px at 20% 30%, rgb(var(--jp-shikon) / 0.20) 0%, transparent 70%),
+    radial-gradient(circle 500px at 80% 70%, rgb(var(--jp-aiiro) / 0.25) 0%, transparent 70%);
+}
+
+/* 星屑のオーバーレイ */
+.bg-starfield {
+  background-image: url("/textures/starfield.svg");
+  background-repeat: repeat;
+  background-size: 400px 400px;
+}
+
+/* 多色 nebula — ファンタジー異世界風の星雲。
+   紫紺 / 桃 / 橙 の 3 色を soft-light で重ね合わせる。
+   absolute レイヤーとして Hero に被せて使う。 */
+.nebula-fantasy {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background:
+    /* 紫の濃密ガス (upper-left) */
+    radial-gradient(
+      ellipse 50% 35% at 25% 25%,
+      rgb(140 70 180 / 0.32) 0%,
+      rgb(140 70 180 / 0.10) 40%,
+      transparent 70%
+    ),
+    /* 桃赤の渦 (mid-right) */
+    radial-gradient(
+      ellipse 45% 30% at 75% 40%,
+      rgb(220 90 130 / 0.26) 0%,
+      rgb(220 90 130 / 0.08) 45%,
+      transparent 70%
+    ),
+    /* 暖色の燃焼 (lower-left) */
+    radial-gradient(
+      ellipse 40% 30% at 30% 75%,
+      rgb(230 130 60 / 0.22) 0%,
+      rgb(230 130 60 / 0.06) 45%,
+      transparent 70%
+    ),
+    /* 水色の冷却 (upper-right) */
+    radial-gradient(
+      ellipse 35% 25% at 80% 15%,
+      rgb(80 140 200 / 0.22) 0%,
+      rgb(80 140 200 / 0.06) 45%,
+      transparent 70%
+    );
+}
+
+/* 地平線の金色光 — Hero 下端からの暖色グラデ */
+.horizon-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 65%,
+    rgb(230 150 60 / 0.18) 85%,
+    rgb(255 180 80 / 0.32) 100%
+  );
+}
+
+/* 金箔の glow を見出しに乗せる */
+.text-glow-kinpaku {
+  color: rgb(var(--jp-shironeri));
+  text-shadow:
+    0 0 24px rgb(var(--jp-kinpaku) / 0.35),
+    0 0 48px rgb(var(--jp-kinpaku) / 0.18);
+}
+
+.text-glow-kinpaku-strong {
+  color: rgb(var(--jp-shironeri));
+  text-shadow:
+    0 0 16px rgb(var(--jp-kinpaku) / 0.5),
+    0 0 32px rgb(var(--jp-kinpaku) / 0.3),
+    0 0 64px rgb(var(--jp-shikon) / 0.25);
+}
+
+/* 紫微 (Polaris) 等が穏やかに瞬く */
+@keyframes constellation-twinkle {
+  0%, 100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+.constellation-twinkle {
+  animation: constellation-twinkle 5.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes star-soft-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+.star-soft-pulse {
+  animation: star-soft-pulse 7s ease-in-out infinite;
+}
+
+/* 装飾の区切り — 金線が左右に伸び、中央に小さな菱形 */
+.ornament-flourish {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+.ornament-flourish::before,
+.ornament-flourish::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--jp-kinpaku) / 0.45) 50%,
+    transparent 100%
+  );
+}
+.ornament-flourish-diamond {
+  width: 6px;
+  height: 6px;
+  background: rgb(var(--jp-kinpaku) / 0.7);
+  transform: rotate(45deg);
+  box-shadow: 0 0 12px rgb(var(--jp-kinpaku) / 0.6);
+}
+
+/* 金箔散らし */
+.deco-kinpaku-chiri::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgb(var(--jp-kinpaku) / 0.3) 0%, transparent 0.5%),
+    radial-gradient(circle at 78% 28%, rgb(var(--jp-kinpaku) / 0.25) 0%, transparent 0.4%),
+    radial-gradient(circle at 35% 65%, rgb(var(--jp-kinpaku) / 0.2) 0%, transparent 0.6%),
+    radial-gradient(circle at 88% 82%, rgb(var(--jp-kinpaku) / 0.28) 0%, transparent 0.3%);
+}
+
+/* 墨の滲み divider */
+.divider-sumi {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--jp-kinpaku) / 0.3) 30%,
+    rgb(var(--jp-kinpaku) / 0.5) 50%,
+    rgb(var(--jp-kinpaku) / 0.3) 70%,
+    transparent 100%
+  );
+  position: relative;
+}
+.divider-sumi::after {
+  content: "";
+  position: absolute;
+  inset: -2px 30% -2px 30%;
+  background: rgb(var(--jp-kinpaku) / 0.05);
+  filter: blur(3px);
+}
+
+/* 朱印 stamp — 後方互換のため残置 (新規利用は SealMark を推奨) */
+.stamp-shuin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--jp-shuiro));
+  color: rgb(var(--jp-shironeri));
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 0 2px rgb(var(--jp-shuiro)),
+    inset 0 0 0 3px rgb(var(--jp-shironeri) / 0.15);
+  filter: contrast(0.95);
+}
+
+/* 筆書ロゴマーク — 「星」を金箔色 + 微細なグロー + 微細な ink-bleed 演出
+   赤枠なし。 篆書体に近い Yuji Boku を最大限活かす */
+.seal-mark {
+  display: inline-block;
+  font-family: var(--font-seal);
+  line-height: 1;
+  background: linear-gradient(
+    180deg,
+    rgb(var(--jp-kinpaku)) 0%,
+    rgb(var(--jp-shumei) / 0.85) 60%,
+    rgb(var(--jp-kinpaku) / 0.9) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter:
+    drop-shadow(0 0 10px rgb(var(--jp-kinpaku) / 0.45))
+    drop-shadow(0 0 24px rgb(var(--jp-shikon) / 0.35));
+  transform: translateY(-0.05em);
+}
+
+/* ===========================================
+ * Reveal animations — 静の美学に寄せた fade
+ * =========================================== */
+@keyframes reading-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Suspense 境界の解決直後に適用するクラス。
+   占術結果の AI 解釈が「墨が滲むように」現れる演出。 */
+.reading-fade-in {
+  animation: reading-fade-in 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* ===========================================
+ * Accessibility — reduced motion
+ * =========================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
